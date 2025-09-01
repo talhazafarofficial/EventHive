@@ -1,0 +1,163 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+
+<!-- Hero Section -->
+<section class="bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-500 text-white py-20">
+  <div class="text-center max-w-3xl mx-auto px-4">
+    <span class="inline-block px-4 py-1 bg-white/10 text-white rounded-full mb-4 text-sm font-medium animate-bounce">
+      💬 We're Here to Help
+    </span>
+    <h1 class="text-4xl md:text-5xl font-bold mb-4">Get in Touch</h1>
+    <p class="text-lg opacity-90">Have questions? Our team typically responds within 24 hours.</p>
+  </div>
+</section>
+
+<!-- Main Section: Form + Help Options -->
+<section class="py-20 bg-gray-100">
+  <div class="max-w-7xl mx-auto px-4 grid lg:grid-cols-2 gap-12 items-start">
+
+    <!-- Send Us a Message Form -->
+    <div>
+      <h2 class="text-3xl font-bold mb-6">Send Us a Message</h2>
+      <form method="post" class="bg-white shadow-md rounded-xl p-8 space-y-6">
+        {% csrf_token %}
+        <div class="grid sm:grid-cols-2 gap-5">
+          <div>
+            <label class="text-sm font-medium text-gray-700">Your Name</label>
+            <input type="text" name="name" required placeholder="John Doe"
+              class="w-full mt-1 px-4 py-2 rounded-md border border-gray-300 focus:ring-2 focus:ring-indigo-500 focus:outline-none">
+          </div>
+          <div>
+            <label class="text-sm font-medium text-gray-700">Email Address</label>
+            <input type="email" name="email" required placeholder="you@example.com"
+              class="w-full mt-1 px-4 py-2 rounded-md border border-gray-300 focus:ring-2 focus:ring-indigo-500 focus:outline-none">
+          </div>
+        </div>
+        <div>
+          <label class="text-sm font-medium text-gray-700">Subject</label>
+          <input type="text" name="subject" required placeholder="How can we help you?"
+            class="w-full mt-1 px-4 py-2 rounded-md border border-gray-300 focus:ring-2 focus:ring-indigo-500 focus:outline-none">
+        </div>
+        <div>
+          <label class="text-sm font-medium text-gray-700">Category</label>
+          <select name="category"
+            class="w-full mt-1 px-4 py-2 rounded-md border border-gray-300 focus:ring-2 focus:ring-indigo-500 focus:outline-none">
+            <option value="general">General Inquiry</option>
+            <option value="booking">Booking Support</option>
+            <option value="technical">Technical Issues</option>
+            <option value="organizer">Organizer Support</option>
+          </select>
+        </div>
+        <div>
+          <label class="text-sm font-medium text-gray-700">Message</label>
+          <textarea name="message" rows="5" required
+            class="w-full mt-1 px-4 py-2 rounded-md border border-gray-300 focus:ring-2 focus:ring-indigo-500 focus:outline-none"></textarea>
+        </div>
+        <button type="submit"
+          class="w-full bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-purple-700 hover:to-indigo-700 text-white font-semibold py-3 rounded-md transition-all duration-300 flex items-center justify-center gap-2 group">
+         Send Message
+        </button>
+        <p class="text-center text-sm text-gray-500 pt-2">Our team replies via email within 1 working day.</p>
+      </form>
+    </div>
+
+    <!-- Other Ways to Get Help -->
+    <div>
+      <h2 class="text-3xl font-bold mb-6">Other Ways to Get Help</h2>
+      <div class="space-y-6">
+
+        <!-- Help Center -->
+        <div class="flex items-start bg-white p-6 rounded-xl shadow hover:shadow-md transition group">
+          <div
+            class="w-12 h-12 rounded-lg flex items-center justify-center bg-indigo-600 text-white mr-4 group-hover:rotate-12 transition-transform">
+            <!-- Help Icon SVG -->
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" stroke="currentColor"
+              viewBox="0 0 24 24">
+              <path stroke-width="2" d="M12 3v1m0 16v1m8-8h1M3 12H2m15.364 6.364l.707.707M5.636 5.636l-.707-.707m12.728 0l.707-.707M5.636 18.364l-.707.707M12 8a4 4 0 100 8 4 4 0 000-8z" />
+            </svg>
+          </div>
+          <div>
+            <h3 class="font-semibold text-lg mb-1">Help Center</h3>
+            <p class="text-sm text-gray-600">Search articles and guides tailored to your problems.</p>
+          </div>
+        </div>
+
+        <!-- Community Forum -->
+        <div class="flex items-start bg-white p-6 rounded-xl shadow hover:shadow-md transition group">
+          <div
+            class="w-12 h-12 rounded-lg flex items-center justify-center bg-purple-600 text-white mr-4 group-hover:rotate-12 transition-transform">
+            <!-- Forum Icon SVG -->
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" stroke="currentColor"
+              viewBox="0 0 24 24">
+              <path stroke-width="2"
+                d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2v10z" />
+            </svg>
+          </div>
+          <div>
+            <h3 class="font-semibold text-lg mb-1">Community Forum</h3>
+            <p class="text-sm text-gray-600">Discuss with other EventHive users and share best practices.</p>
+          </div>
+        </div>
+
+        <!-- Live Chat -->
+        <div class="flex items-start bg-white p-6 rounded-xl shadow hover:shadow-md transition group">
+          <div
+            class="w-12 h-12 rounded-lg flex items-center justify-center bg-pink-600 text-white mr-4 group-hover:rotate-12 transition-transform">
+            <!-- Chat Icon -->
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" stroke="currentColor"
+              viewBox="0 0 24 24">
+              <path stroke-width="2"
+                d="M7 8h10M7 12h8m-9 8l-3 3V4a2 2 0 012-2h14a2 2 0 012 2v12a2 2 0 01-2 2H7z" />
+            </svg>
+          </div>
+          <div>
+            <h3 class="font-semibold text-lg mb-1">Live Chat</h3>
+            <p class="text-sm text-gray-600">Chat with our support team 24/7 for instant answers.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ Section -->
+<section class="py-20 bg-white">
+  <div class="max-w-5xl mx-auto px-4">
+    <h2 class="text-3xl font-bold text-center mb-12">Frequently Asked Questions</h2>
+    <div class="space-y-6">
+      {% comment %} You can also replace this with a loop if FAQs come from backend {% endcomment %}
+
+      <div class="p-6 border rounded-lg shadow-sm hover:shadow-md transition">
+        <h3 class="text-lg font-semibold text-gray-800 hover:text-indigo-600 transition">How do I book tickets for an event?</h3>
+        <p class="mt-2 text-sm text-gray-600">Just browse listed events, select your ticket type, finish checkout, and you'll get an instant confirmation email.</p>
+      </div>
+
+      <div class="p-6 border rounded-lg shadow-sm hover:shadow-md transition">
+        <h3 class="text-lg font-semibold text-gray-800 hover:text-indigo-600 transition">Can I cancel or refund my tickets?</h3>
+        <p class="mt-2 text-sm text-gray-600">You can cancel any booking by contacting our support team through the Contact page. We’re happy to assist you!.</p>
+      </div>
+
+      <div class="p-6 border rounded-lg shadow-sm hover:shadow-md transition">
+        <h3 class="text-lg font-semibold text-gray-800 hover:text-indigo-600 transition">How do I organize an event?</h3>
+        <p class="mt-2 text-sm text-gray-600">If you're interested in organizing an event, please reach out to our team via the Contact page.</p>
+      </div>
+
+      <div class="p-6 border rounded-lg shadow-sm hover:shadow-md transition">
+        <h3 class="text-lg font-semibold text-gray-800 hover:text-indigo-600 transition">Is payment information secure?</h3>
+        <p class="mt-2 text-sm text-gray-600">We ensure your payment information stays 100% secure and is handled directly and confidentially by our team.</p>
+      </div>
+
+    </div>
+
+    <div class="text-center mt-10">
+      <p class="text-gray-500 text-sm mb-4">Need more help?</p>
+      <a href="#"
+        class="inline-block bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-semibold px-6 py-3 rounded-md transition hover:scale-105">View
+        All FAQs</a>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

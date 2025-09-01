@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+
+<div class="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
+  <div class="max-w-7xl mx-auto space-y-10">
+
+    <!-- ✅ Welcome Header -->
+    <div>
+      <h1 class="text-3xl font-bold text-gray-800 mb-2">
+        Welcome back, {{ user.first_name|default:user.username }} 👋
+      </h1>
+      <p class="text-gray-600 text-sm">
+        Here's a summary of your recent bookings and upcoming events.
+      </p>
+    </div>
+
+    <!-- ✅ Stats (Simple for now) -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div class="p-6 bg-white rounded-lg shadow hover:shadow-md transition">
+        <div class="text-sm text-gray-500 mb-1">Total Bookings</div>
+        <div class="text-2xl font-bold text-gray-800">{{ bookings|length }}</div>
+      </div>
+      <div class="p-6 bg-white rounded-lg shadow hover:shadow-md transition">
+        <div class="text-sm text-gray-500 mb-1">Member Since</div>
+        <div class="text-2xl font-bold text-gray-800">{{ user.date_joined|date:"F Y" }}</div>
+      </div>
+      <div class="p-6 bg-white rounded-lg shadow hover:shadow-md transition">
+        <div class="text-sm text-gray-500 mb-1">Upcoming Events</div>
+        <div class="text-2xl font-bold text-gray-800">
+          {{ bookings|length }}
+        </div>
+      </div>
+      <div class="p-6 bg-white rounded-lg shadow hover:shadow-md transition">
+        <div class="text-sm text-gray-500 mb-1">Email</div>
+        <div class="text-lg font-medium text-gray-800 truncate">{{ user.email }}</div>
+      </div>
+    </div>
+
+    <!-- ✅ Booked Events List -->
+    <div class="bg-white p-6 rounded-lg shadow">
+      <div class="flex justify-between items-center mb-4">
+        <h2 class="text-lg font-semibold text-gray-800">Your Booked Events</h2>
+        <a href="{% url 'events_list' %}" class="text-sm text-indigo-600 hover:underline">View All</a>
+      </div>
+      
+      {% if bookings %}
+      <div class="space-y-4">
+        {% for booking in bookings %}
+        <div class="flex items-start justify-between p-4 border rounded-md hover:shadow-sm">
+          <div class="flex space-x-4">
+            <div class="w-12 h-12 bg-indigo-500 rounded-md flex items-center justify-center text-white">
+              📅
+            </div>
+            <div>
+              <h3 class="font-semibold text-gray-900">{{ booking.event.title }}</h3>
+              <p class="text-sm text-gray-500">
+                📍 {{ booking.event.location }} <br>
+                🕒 {{ booking.event.date|date:"F j, Y - h:i A" }}
+              </p>
+              <p class="text-xs text-gray-400 mt-1">Booked on {{ booking.booked_at|date:"F j, Y" }}</p>
+            </div>
+          </div>
+          <a href="{% url 'event_detail' booking.event.id %}" class="text-indigo-600 text-sm hover:underline mt-2">View Event</a>
+        </div>
+        {% endfor %}
+      </div>
+      {% else %}
+        <p class="text-sm text-gray-500">You haven’t booked any events yet. <a href="{% url 'events_list' %}" class="text-indigo-600">Browse events</a></p>
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+{% endblock %}

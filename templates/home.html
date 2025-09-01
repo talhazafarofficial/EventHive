@@ -1,0 +1,237 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+<!-- Hero Section -->
+<section class="relative flex items-center justify-center overflow-hidden" style="min-height: 80vh;">
+  <div class="absolute inset-0 bg-cover bg-center bg-no-repeat" style="background-image: url('{% static 'img/hero-image.jpg' %}')">
+    <div class="absolute inset-0 bg-gradient-to-r from-black/70 via-black/50 to-transparent"></div></div>
+  </div>
+
+  <div class="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8 text-center text-white">
+
+    <h1 class="text-4xl md:text-6xl font-extrabold mb-6 leading-tight">
+      Discover Amazing 
+      <span class="block bg-gradient-to-r from-indigo-400 to-pink-600 bg-clip-text text-transparent">Events Near You</span>
+    </h1>
+
+    <p class="text-xl md:text-2xl mb-8 max-w-3xl mx-auto text-gray-200 animate-fade-in-up">
+      Find and book the best concerts, conferences, workshops, and more happening around you.
+    </p>
+
+    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+      <a href="{% url 'events_list' %}" class="bg-gradient-to-r from-indigo-500 to-purple-600 hover:from-indigo-600 hover:to-purple-700 text-white text-lg px-6 py-3 rounded-lg transition duration-300 inline-flex items-center">
+        Explore Events
+        <svg xmlns="http://www.w3.org/2000/svg" class="ml-2 h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+        </svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- Stats Section -->
+<!-- Stats Section (AI Page Exact Match) -->
+<section class="py-20 bg-white">
+  <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+
+      <!-- Events Hosted -->
+      <div class="flex flex-col items-center">
+        <div class="w-12 h-12 rounded-lg flex items-center justify-center mb-4 bg-gradient-to-br from-purple-600 to-indigo-600">
+          <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" stroke-width="2"
+               stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+            <path d="M8 2v4M16 2v4M3 10h18M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+          </svg>
+        </div>
+        <div class="text-3xl font-bold text-gray-900">10,000+</div>
+        <div class="text-gray-500">Events Hosted</div>
+      </div>
+
+      <!-- Happy Attendees -->
+      <div class="flex flex-col items-center">
+        <div class="w-12 h-12 rounded-lg flex items-center justify-center mb-4 bg-gradient-to-br from-rose-500 to-pink-500">
+          <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" stroke-width="2"
+               stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+            <path d="M17 21v-2a4 4 0 00-4-4H7a4 4 0 00-4 4v2"/>
+            <circle cx="9" cy="7" r="4"/>
+            <path d="M23 21v-2a4 4 0 00-3-3.87"/>
+            <path d="M16 3.13a4 4 0 010 7.75"/>
+          </svg>
+        </div>
+        <div class="text-3xl font-bold text-gray-900">500K+</div>
+        <div class="text-gray-500">Happy Attendees</div>
+      </div>
+
+      <!-- Cities Worldwide -->
+      <div class="flex flex-col items-center">
+        <div class="w-12 h-12 rounded-lg flex items-center justify-center mb-4 bg-gradient-to-br from-blue-500 to-teal-400">
+          <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" stroke-width="2"
+               stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+            <path d="M21 10c0 5-9 12-9 12S3 15 3 10a9 9 0 1118 0z"/>
+            <circle cx="12" cy="10" r="3"/>
+          </svg>
+        </div>
+        <div class="text-3xl font-bold text-gray-900">150+</div>
+        <div class="text-gray-500">Cities Worldwide</div>
+      </div>
+
+      <!-- Average Rating -->
+      <div class="flex flex-col items-center">
+        <div class="w-12 h-12 rounded-lg flex items-center justify-center mb-4 bg-gradient-to-br from-yellow-400 to-yellow-600">
+          <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" stroke-width="2"
+               stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+            <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2
+                     9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
+          </svg>
+        </div>
+        <div class="text-3xl font-bold text-gray-900">4.9</div>
+        <div class="text-gray-500">Average Rating</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- Upcoming Events -->
+<section class="py-20 bg-white">
+  <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
+    <h2 class="text-4xl font-bold mb-4 text-gray-900">Upcoming Events</h2>
+    <p class="text-lg text-gray-600 mb-12">Check out what's happening near you this month</p>
+
+    {% if events %}
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-10">
+      {% for event in events %}
+      <div class="bg-white rounded-lg shadow-md hover:shadow-lg transition overflow-hidden">
+        <img src="{{ event.image_url }}" alt="{{ event.title }}" class="w-full h-48 object-cover">
+        <div class="p-6 text-left">
+          <h3 class="text-xl font-semibold text-gray-900 mb-2">{{ event.title }}</h3>
+          <p class="text-gray-700 mb-2">{{ event.description|truncatechars:100 }}</p>
+          <p class="text-sm text-gray-500 mb-1">📍 {{ event.location }}</p>
+          <p class="text-sm text-gray-500">📅 {{ event.date|date:"F j, Y" }} at {{ event.date|time:"H:i A" }}</p>
+          <div class="mt-4">
+            <a href="{% url 'event_detail' event.id %}" class="text-indigo-600 hover:underline">View Details</a>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    {% else %}
+    <p class="text-gray-500">No events found.</p>
+    {% endif %}
+
+    <div class="mt-12">
+      <a href="{% url 'events_list' %}" class="bg-gradient-to-r from-pink-500 to-purple-600 text-white px-6 py-3 rounded-md text-lg inline-flex items-center hover:from-pink-600 hover:to-purple-700">
+        Browse All Events
+        <svg xmlns="http://www.w3.org/2000/svg" class="ml-2 h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+        </svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+
+<!-- Features Section -->
+<section class="py-20 bg-white">
+  <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-16">
+      <h2 class="text-4xl font-bold text-gray-900 mb-4">Why Choose EventHive?</h2>
+      <p class="text-lg text-gray-600">
+        We make discovering and booking events simple, secure, and enjoyable.
+      </p>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-8 text-center">
+      <div class="bg-gray-50 p-10 rounded-lg shadow hover:shadow-lg transition">
+        <div class="text-5xl mb-4">🔍</div>
+        <h3 class="text-xl font-semibold mb-2 text-gray-900">Easy Event Discovery</h3>
+        <p class="text-gray-600">
+          Find amazing events happening near you with our smart search and filtering system.
+        </p>
+      </div>
+
+      <div class="bg-gray-50 p-10 rounded-lg shadow hover:shadow-lg transition">
+        <div class="text-5xl mb-4">🔐</div>
+        <h3 class="text-xl font-semibold mb-2 text-gray-900">Secure Booking</h3>
+        <p class="text-gray-600">
+          Book your tickets safely with our encrypted payment system and instant confirmation.
+        </p>
+      </div>
+
+      <div class="bg-gray-50 p-10 rounded-lg shadow hover:shadow-lg transition">
+        <div class="text-5xl mb-4">⚡</div>
+        <h3 class="text-xl font-semibold mb-2 text-gray-900">Real-time Updates</h3>
+        <p class="text-gray-600">
+          Get instant notifications about event changes, reminders, and exclusive offers.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="py-20 bg-gradient-to-r from-indigo-500 to-pink-500 text-white text-center">
+  <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+    <h2 class="text-3xl md:text-4xl font-bold mb-4">Ready to Start Your Journey?</h2>
+    <p class="text-lg md:text-xl mb-8 max-w-2xl mx-auto opacity-90">
+      Join thousands of event enthusiasts who trust EventHive for their entertainment needs.
+    </p>
+
+    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+      <a href="{% url 'signup' %}" class="bg-white text-indigo-700 hover:bg-gray-100 px-6 py-3 rounded-lg text-lg font-semibold inline-flex items-center justify-center">
+         Get Started Free
+      </a>
+      <a href="{% url 'events_list' %}" class="border border-white px-6 py-3 rounded-lg text-lg font-semibold inline-flex items-center justify-center hover:bg-white hover:text-pink-600 transition">
+        Browse Events
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+{% comment %} <footer class="bg-gray-900 text-white py-12">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid md:grid-cols-4 gap-8">
+
+      <div class="md:col-span-2">
+        <div class="flex items-center space-x-4 mb-4">
+          <a href="{% url 'home' %}">
+            <img src="{% static 'img/logo.png' %}" alt="logo" class="w-10 h-10">
+          </a>
+          <a href="{% url 'home' %}" class="text-2xl font-bold font-russo bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
+            EventHive
+          </a>
+        </div>
+        <p class="text-gray-400">
+         EventHive is your home for amazing experiences. Whether you're hosting or attending, we connect people through unforgettable events.
+        </p>
+      </div>
+
+      <div>
+        <h3 class="font-semibold mb-4">Quick Links</h3>
+        <ul class="space-y-2">
+          <li><a href="{% url 'about' %}" class="text-gray-400 hover:text-white transition duration-200">About Us</a></li>
+          <li><a href="{% url 'contact' %}" class="text-gray-400 hover:text-white transition duration-200">Contact</a></li>
+          </ul>
+      </div>
+
+      <div>
+        <h3 class="font-semibold mb-4">Platform</h3>
+        <ul class="space-y-2">
+          <li><a href="{% url 'login' %}" class="text-gray-400 hover:text-white transition duration-200">Login</a></li>
+          <li><a href="{% url 'signup' %}" class="text-gray-400 hover:text-white transition duration-200">Sign Up</a></li>
+          <li><a href="{% url 'dashboard' %}" class="text-gray-400 hover:text-white transition duration-200">Dashboard</a></li>
+        </ul>
+      </div>
+
+    </div>
+
+    <div class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400 text-sm">
+      <p>&copy; 2025 EventHive. Made by Muhammad Talha Ameer. All rights reserved.</p>
+    </div>
+  </div>
+</footer> {% endcomment %}
+
+{% endblock %}

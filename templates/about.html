@@ -1,0 +1,245 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+
+<!-- Hero Section -->
+<section class="relative py-20 overflow-hidden bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 text-white">
+  <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center max-w-4xl">
+    <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold leading-tight mb-6">
+      Connecting People Through
+      <span class="block text-transparent bg-clip-text bg-gradient-to-r from-white to-purple-300">
+        Amazing Experiences
+      </span>
+    </h1>
+    <p class="text-lg md:text-xl opacity-90 mb-8">
+      EventHive is more than just a platform — we’re building a community where every event inspires connection and unforgettable memories.
+    </p>
+    <div class="flex flex-col sm:flex-row justify-center gap-4">
+      <a href="{% url 'events_list' %}" class="bg-white text-indigo-700 font-bold px-6 py-3 rounded-md hover:bg-gray-100 transition">
+        Explore Events
+      </a>
+      <a href="{% url 'contact' %}" class="border border-white/30 text-white font-bold px-6 py-3 rounded-md hover:bg-white/10 transition">
+        Contact Us
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- Stats Section -->
+<section class="py-20 bg-white">
+  <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+
+      <!-- Events Hosted -->
+      <div class="flex flex-col items-center">
+        <div class="w-12 h-12 rounded-lg flex items-center justify-center mb-4 bg-gradient-to-br from-purple-600 to-indigo-600">
+          <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" stroke-width="2"
+               stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+            <path d="M8 2v4M16 2v4M3 10h18M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+          </svg>
+        </div>
+        <div class="text-3xl font-bold text-gray-900">10K+</div>
+        <div class="text-gray-500">Events Hosted</div>
+      </div>
+
+      <!-- Happy Attendees -->
+      <div class="flex flex-col items-center">
+        <div class="w-12 h-12 rounded-lg flex items-center justify-center mb-4 bg-gradient-to-br from-rose-500 to-pink-500">
+          <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" stroke-width="2"
+               stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+            <path d="M17 21v-2a4 4 0 00-4-4H7a4 4 0 00-4 4v2"/>
+            <circle cx="9" cy="7" r="4"/>
+            <path d="M23 21v-2a4 4 0 00-3-3.87"/>
+            <path d="M16 3.13a4 4 0 010 7.75"/>
+          </svg>
+        </div>
+        <div class="text-3xl font-bold text-gray-900">1M+</div>
+        <div class="text-gray-500">Happy Users</div>
+      </div>
+
+      <!-- Cities Worldwide -->
+      <div class="flex flex-col items-center">
+        <div class="w-12 h-12 rounded-lg flex items-center justify-center mb-4 bg-gradient-to-br from-blue-500 to-teal-400">
+          <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" stroke-width="2"
+               stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+            <path d="M21 10c0 5-9 12-9 12S3 15 3 10a9 9 0 1118 0z"/>
+            <circle cx="12" cy="10" r="3"/>
+          </svg>
+        </div>
+        <div class="text-3xl font-bold text-gray-900">50+</div>
+        <div class="text-gray-500">Cities Worldwide</div>
+      </div>
+
+      <!-- Average Rating -->
+      <div class="flex flex-col items-center">
+        <div class="w-12 h-12 rounded-lg flex items-center justify-center mb-4 bg-gradient-to-br from-yellow-400 to-yellow-600">
+          <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" stroke-width="2"
+               stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+            <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2
+                     9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
+          </svg>
+        </div>
+        <div class="text-3xl font-bold text-gray-900">4.9</div>
+        <div class="text-gray-500">Average Rating</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- Our Story -->
+<section class="py-20 bg-white">
+  <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="max-w-4xl mx-auto text-center mb-14">
+      <h2 class="text-3xl sm:text-4xl font-bold mb-4">Our Story</h2>
+      <p class="text-gray-600 text-lg">Born from a simple idea: events should be easy to find, book, and enjoy.</p>
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-12 items-center">
+      <div class="space-y-6">
+        <h3 class="text-2xl font-semibold text-gray-800">The Beginning</h3>
+        <p class="text-gray-600 leading-relaxed">
+          In 2024, our founders were frustrated by the fragmented landscape of event discovery. Great events were happening everywhere, but finding them was painful.
+        </p>
+        <p class="text-gray-600 leading-relaxed">
+          We created EventHive to unify discovery, booking, and experience into one beautiful platform. What began as a weekend project became a global movement.
+        </p>
+
+        <ul class="space-y-3 text-gray-700 text-sm font-medium">
+  <li class="flex items-start gap-2">
+    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-green-500 mt-0.5" fill="none"
+         viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round"
+            d="M9 12l2 2 4-4" />
+      <circle cx="12" cy="12" r="10" />
+    </svg>
+    1M+ events successfully booked
+  </li>
+
+  <li class="flex items-start gap-2">
+    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-green-500 mt-0.5" fill="none"
+         viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round"
+            d="M9 12l2 2 4-4" />
+      <circle cx="12" cy="12" r="10" />
+    </svg>
+    500+ cities worldwide coverage
+  </li>
+
+  <li class="flex items-start gap-2">
+    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-green-500 mt-0.5" fill="none"
+         viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round"
+            d="M9 12l2 2 4-4" />
+      <circle cx="12" cy="12" r="10" />
+    </svg>
+    99.9% platform uptime reliability
+  </li>
+</ul>
+      </div>
+
+      <div class="relative">
+        <img src="{% static 'img/about-image.png' %}" alt="Our Team" class="rounded-xl shadow-lg">
+        <div class="absolute bottom-4 right-4 bg-indigo-600 text-white rounded-full px-5 py-2 font-bold">
+          2024
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Our Values Section -->
+<section class="py-20 bg-gray-50">
+  <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-12">
+      <h2 class="text-3xl sm:text-4xl font-bold mb-4">Our Values</h2>
+      <p class="max-w-2xl mx-auto text-gray-600">The principles behind EventHive — guiding how we innovate, communicate, and grow.</p>
+    </div>
+
+    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+      <div class="bg-white p-6 rounded-xl shadow hover:shadow-lg transition text-center">
+        <div class="w-14 h-14 mx-auto mb-4 bg-gradient-to-r from-purple-600 to-indigo-700 text-white rounded-lg flex items-center justify-center">
+          {% include "icons/heart.svg" %}
+        </div>
+        <h3 class="text-lg font-semibold mb-2">Passion for Events</h3>
+        <p class="text-gray-600 text-sm">We believe in building joyful, human connections through shared experiences.</p>
+      </div>
+
+      <div class="bg-white p-6 rounded-xl shadow hover:shadow-lg transition text-center">
+        <div class="w-14 h-14 mx-auto mb-4 bg-gradient-to-r from-purple-600 to-indigo-700 text-white rounded-lg flex items-center justify-center">
+          {% include "icons/shield.svg" %}
+        </div>
+        <h3 class="text-lg font-semibold mb-2">Trust & Security</h3>
+        <p class="text-gray-600 text-sm">Your safety and privacy are top priority — backed by smart tech and care.</p>
+      </div>
+
+      <div class="bg-white p-6 rounded-xl shadow hover:shadow-lg transition text-center">
+        <div class="w-14 h-14 mx-auto mb-4 bg-gradient-to-r from-purple-600 to-indigo-700 text-white rounded-lg flex items-center justify-center">
+          {% include "icons/zap.svg" %}
+        </div>
+        <h3 class="text-lg font-semibold mb-2">Innovation First</h3>
+        <p class="text-gray-600 text-sm">We constantly improve to delight our users and simplify event journeys.</p>
+      </div>
+
+      <div class="bg-white p-6 rounded-xl shadow hover:shadow-lg transition text-center">
+        <div class="w-14 h-14 mx-auto mb-4 bg-gradient-to-r from-purple-600 to-indigo-700 text-white rounded-lg flex items-center justify-center">
+          {% include "icons/target.svg" %}
+        </div>
+        <h3 class="text-lg font-semibold mb-2">Customer Focus</h3>
+        <p class="text-gray-600 text-sm">We design everything based on real feedback and real user needs.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Testimonials -->
+<section class="py-20 bg-gray-100">
+  <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
+    <h2 class="text-3xl sm:text-4xl font-bold mb-4">What People Say</h2>
+    <p class="mb-10 text-gray-600 max-w-2xl mx-auto">Real love from our customers, organizers, and users worldwide.</p>
+
+    <div class="grid md:grid-cols-3 gap-8">
+      <div class="bg-white p-6 rounded-xl shadow hover:shadow-lg transition">
+        <div class="text-yellow-400 mb-3">★★★★★</div>
+        <blockquote class="text-gray-600 italic mb-4">
+          "EventHive has completely changed how we discover and attend events. Love it!"
+        </blockquote>
+        <div class="text-sm text-gray-800 font-semibold">Jennifer Walsh</div>
+        <div class="text-xs text-gray-500">Marketing Director, TechCorp</div>
+      </div>
+
+      <div class="bg-white p-6 rounded-xl shadow hover:shadow-lg transition">
+        <div class="text-yellow-400 mb-3">★★★★★</div>
+        <blockquote class="text-gray-600 italic mb-4">
+          "As an event organizer, reaching wider audiences has never been easier."
+        </blockquote>
+        <div class="text-sm text-gray-800 font-semibold">Michael Brown</div>
+        <div class="text-xs text-gray-500">Event Coordinator, Creative Events Co.</div>
+      </div>
+
+      <div class="bg-white p-6 rounded-xl shadow hover:shadow-lg transition">
+        <div class="text-yellow-400 mb-3">★★★★★</div>
+        <blockquote class="text-gray-600 italic mb-4">
+          "Reliable, user-friendly, and beautiful. EventHive lets us focus on what matters."
+        </blockquote>
+        <div class="text-sm text-gray-800 font-semibold">Lisa Chang</div>
+        <div class="text-xs text-gray-500">Ops Manager, Startup Hub</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="py-20 bg-gradient-to-r from-purple-600 to-indigo-700 text-white text-center">
+  <div class="container mx-auto px-4">
+    <h2 class="text-3xl sm:text-4xl font-bold mb-4">Want to Join the Community?</h2>
+    <p class="mb-8 opacity-90 max-w-xl mx-auto">
+      Whether you're curious, creating, or sharing — EventHive is where your journey begins.
+    </p>
+    <a href="{% url 'signup' %}" class="bg-white text-indigo-700 font-semibold px-8 py-3 rounded-lg hover:bg-gray-100 transition">
+      Get Started Free
+    </a>
+  </div>
+</section>
+
+{% endblock %}

@@ -1,0 +1,111 @@
+{% load static %}
+
+<!DOCTYPE html><html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>{% block title %}Event Management{% endblock %}</title>
+  <link rel="icon" href="{% static 'img/logo.png' %}">
+  <meta name="description" content="EventHive is a modern event management platform for discovering, organizing, and managing events. Easily browse upcoming events, register, and connect with the community. Secure user authentication, personalized dashboards, and a seamless experience for attendees and organizers.">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-white text-gray-800">
+
+<!-- ✅ Navbar -->
+<header class="fixed top-0 left-0 right-0 z-50 bg-white/70 backdrop-blur-md border-b border-gray-200 shadow-md">
+  <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex items-center justify-between h-16">
+
+      <!-- LOGO -->
+      <a href="{% url 'home' %}" class="flex items-center space-x-2 group">
+        <div>
+          <img src="{% static 'img/logo.png' %}" alt="Logo" class="w-10 h-10" />
+        </div>
+        <span class="text-xl font-extrabold bg-gradient-to-r from-indigo-500 to-purple-600 bg-clip-text text-transparent">EventHive</span>
+      </a>
+
+      <!-- Desktop Navigation -->
+      <nav class="hidden md:flex space-x-6">
+        <a href="{% url 'home' %}" class="text-sm font-medium relative hover:text-indigo-600 transition-all duration-200 {% if request.path == '/' %}text-indigo-600 after:absolute after:-bottom-1 after:left-0 after:h-0.5 after:w-full after:bg-gradient-to-r after:from-indigo-500 after:to-purple-500{% endif %}">Home</a>
+        <a href="{% url 'events_list' %}" class="text-sm font-medium relative hover:text-indigo-600 transition-all duration-200 {% if request.path == '/events/' %}text-indigo-600 after:absolute after:-bottom-1 after:left-0 after:h-0.5 after:w-full after:bg-gradient-to-r after:from-indigo-500 after:to-purple-500{% endif %}">Events</a>
+        <a href="{% url 'about' %}" class="text-sm font-medium relative hover:text-indigo-600 transition-all duration-200 {% if request.path == '/about/' %}text-indigo-600 after:absolute after:-bottom-1 after:left-0 after:h-0.5 after:w-full after:bg-gradient-to-r after:from-indigo-500 after:to-purple-500{% endif %}">About</a>
+        <a href="{% url 'contact' %}" class="text-sm font-medium relative hover:text-indigo-600 transition-all duration-200 {% if request.path == '/contact/' %}text-indigo-600 after:absolute after:-bottom-1 after:left-0 after:h-0.5 after:w-full after:bg-gradient-to-r after:from-indigo-500 after:to-purple-500{% endif %}">Contact</a>
+        {% if user.is_authenticated %}
+        <a href="{% url 'profile' %}" class="text-sm font-medium relative hover:text-indigo-600 transition-all duration-200 {% if request.path == '/profile/' %}text-indigo-600 after:absolute after:-bottom-1 after:left-0 after:h-0.5 after:w-full after:bg-gradient-to-r after:from-indigo-500 after:to-purple-500{% endif %}">Profile</a>
+      {% endif %}
+      </nav>
+
+      <!-- Desktop Auth Buttons -->
+      <div class="hidden md:flex items-center space-x-4">
+        {% if user.is_authenticated %}
+          <a href="{% url 'dashboard' %}" class="text-sm font-medium text-gray-700 hover:text-indigo-600 transition">Dashboard</a>
+          <form action="{% url 'logout' %}" method="post">
+            {% csrf_token %}
+            <button type="submit" class="text-sm text-red-600 hover:text-red-700 font-medium transition">Logout</button>
+          </form>
+        {% else %}
+          <a href="{% url 'login' %}" class="text-sm font-medium text-gray-700 hover:text-indigo-600 transition">Login</a>
+          <a href="{% url 'signup' %}" class="bg-gradient-to-r from-indigo-500 to-purple-600 text-white text-sm font-semibold px-4 py-2 rounded-md shadow hover:opacity-90 transition">Get Started</a>
+        {% endif %}
+      </div>
+
+      <!-- Mobile Menu Toggle -->
+      <button id="mobile-menu-toggle" class="md:hidden text-gray-700">
+        <svg id="menu-icon" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 block" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+        <svg id="close-icon" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+    </div>
+
+    <!-- Mobile Navigation -->
+    <div id="mobile-menu" class="hidden md:hidden mt-2 border-t border-gray-200 pt-4">
+      <div class="space-y-2 px-2 pb-4">
+        <a href="{% url 'home' %}" class="block px-4 py-2 rounded-md font-medium transition {% if request.path == '/' %}bg-indigo-50 text-indigo-600{% else %}hover:bg-gray-100{% endif %}">Home</a>
+        <a href="{% url 'events_list' %}" class="block px-4 py-2 rounded-md font-medium transition {% if request.path == '/events/' %}bg-indigo-50 text-indigo-600{% else %}hover:bg-gray-100{% endif %}">Events</a>
+        <a href="{% url 'about' %}" class="block px-4 py-2 rounded-md font-medium transition {% if request.path == '/about/' %}bg-indigo-50 text-indigo-600{% else %}hover:bg-gray-100{% endif %}">About</a>
+        <a href="{% url 'contact' %}" class="block px-4 py-2 rounded-md font-medium transition {% if request.path == '/contact/' %}bg-indigo-50 text-indigo-600{% else %}hover:bg-gray-100{% endif %}">Contact</a>
+
+        {% if user.is_authenticated %}
+          <a href="{% url 'profile' %}" class="block px-4 py-2 font-medium hover:bg-gray-100">Profile</a>
+          <a href="{% url 'dashboard' %}" class="block px-4 py-2 font-medium hover:bg-gray-100">Dashboard</a>
+          <form action="{% url 'logout' %}" method="post" class="px-4">
+            {% csrf_token %}
+            <button type="submit" class="w-full text-left py-2 font-medium text-red-600 hover:bg-red-50">Logout</button>
+          </form>
+        {% else %}
+          <a href="{% url 'login' %}" class="block px-4 py-2 font-medium hover:bg-gray-100">Login</a>
+          <a href="{% url 'signup' %}" class="block px-4 py-2 bg-gradient-to-r from-indigo-500 to-purple-600 text-white rounded-md font-semibold text-center">Get Started</a>
+        {% endif %}
+      </div>
+    </div>
+
+  </div>
+</header>
+
+<!-- Spacer for fixed header -->
+<div class="h-16"></div>
+
+<!-- Main -->
+<main>
+  {% block content %}{% endblock %}
+</main>
+
+<!-- Mobile Toggle Script -->
+<script>
+  const toggleBtn = document.getElementById('mobile-menu-toggle');
+  const menu = document.getElementById('mobile-menu');
+  const menuIcon = document.getElementById('menu-icon');
+  const closeIcon = document.getElementById('close-icon');
+
+  toggleBtn.addEventListener('click', () => {
+    menu.classList.toggle('hidden');
+    menuIcon.classList.toggle('hidden');
+    closeIcon.classList.toggle('hidden');
+  });
+</script>
+
+</body>
+</html>

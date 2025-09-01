@@ -1,0 +1,133 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+
+<!-- Filters and Search Form -->
+<form method="get">
+  <!-- Hero Section with Search -->
+  <section class="bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-500 text-white py-20">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center max-w-3xl">
+      <h1 class="text-4xl md:text-5xl font-bold mb-4">Discover Amazing Events</h1>
+      <p class="text-lg md:text-xl opacity-90 mb-8">Find the perfect events that match your interests and book your tickets today</p>
+
+      <!-- Search Bar -->
+      <div class="relative max-w-xl mx-auto">
+        <input
+          type="text"
+          name="q"
+          value="{{ search }}"
+          placeholder="Search events, artists, venues..."
+          class="w-full bg-white/10 text-white placeholder-white/70 border border-white/30 rounded-lg py-3 pl-10 pr-4 focus:ring-2 focus:ring-white focus:outline-none transition"
+        />
+        <!-- Icon -->
+        <div class="absolute left-3 top-1/2 transform -translate-y-1/2 text-white/70">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2"
+            viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round"
+              d="M21 21l-4.35-4.35m0 0A7.5 7.5 0 104.5 4.5a7.5 7.5 0 0012.15 12.15z" />
+          </svg>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Filters Section -->
+  <section class="py-8 bg-gray-100 border-b">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-col md:flex-row items-center justify-between gap-4">
+
+        <!-- Left: Filters -->
+        <div class="flex flex-wrap items-center gap-4">
+          <div class="flex items-center gap-2 text-gray-600 text-sm font-medium">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-gray-500" fill="none" stroke="currentColor"
+              stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round"
+                d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2a1 1 0 01-.293.707L15 13.414V18a1 1 0 01-.447.832l-4 2.5A1 1 0 019 20.5V13.414L3.293 6.707A1 1 0 013 6V4z" />
+            </svg>
+            Filters:
+          </div>
+
+          <!-- Category -->
+          <select name="category"
+            class="rounded-md border border-gray-300 px-3 py-2 text-sm bg-white focus:ring-2 focus:ring-indigo-500">
+            <option value="all" {% if category == "all" %}selected{% endif %}>All Categories</option>
+            <option value="Technology" {% if category == "Technology" %}selected{% endif %}>Technology</option>
+            <option value="Music" {% if category == "Music" %}selected{% endif %}>Music</option>
+            <option value="Business" {% if category == "Business" %}selected{% endif %}>Business</option>
+            <option value="Food" {% if category == "Food" %}selected{% endif %}>Food</option>
+          </select>
+
+         <!-- Location -->
+<select name="location"
+  class="rounded-md border border-gray-300 px-3 py-2 text-sm bg-white focus:ring-2 focus:ring-indigo-500">
+  <option value="all" {% if location == "all" %}selected{% endif %}>All Locations</option>
+  <option value="Pakistan" {% if location == "Pakistan" %}selected{% endif %}>Pakistan</option>
+  <option value="Islamabad" {% if location == "Islamabad" %}selected{% endif %}>Islamabad</option>
+  <option value="Rawalpindi" {% if location == "Rawalpindi" %}selected{% endif %}>Rawalpindi</option>
+  <option value="Karachi" {% if location == "Karachi" %}selected{% endif %}>Karachi</option>
+  <option value="Lahore" {% if location == "Lahore" %}selected{% endif %}>Lahore</option>
+</select>
+        </div>
+
+        <!-- Right: Filter Button -->
+        <button type="submit"
+          class="bg-indigo-600 hover:bg-indigo-500 transition text-white px-4 py-2 rounded-md text-sm flex items-center">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 mr-2" fill="none" stroke="currentColor"
+            viewBox="0 0 24 24" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round"
+              d="M10 6h4m1 0a2 2 0 012 2h0a2 2 0 01-.293 1.293l.952 3.81a2 2 0 01-1.538 2.458L13 19H7a2 2 0 01-2-2v-4h0a2 2 0 012-2h6l-.35-1.4a2 2 0 012.85-2.6z" />
+          </svg>
+          Apply Filters
+        </button>
+
+      </div>
+    </div>
+  </section>
+</form>
+
+<!-- Events Grid -->
+<section class="py-14 bg-white">
+  <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+    {% if events %}
+    <div class="grid gap-10 md:grid-cols-2 lg:grid-cols-3">
+      {% for event in events %}
+      <div
+        class="bg-white rounded-lg shadow-lg overflow-hidden transform hover:scale-[1.02] hover:shadow-xl transition-all duration-300">
+        <img src="{{ event.image_url }}" alt="{{ event.title }}"
+          class="h-48 w-full object-cover transition-transform duration-300" />
+        <div class="p-5">
+          <h3 class="text-xl font-bold text-gray-800">{{ event.title }}</h3>
+          <p class="text-sm text-gray-500 mt-1">{{ event.date|date:"F j, Y" }} · {{ event.location }}</p>
+          <p class="text-sm text-gray-700 mt-3 line-clamp-3">{{ event.description|truncatechars:100 }}</p>
+          <div class="mt-4">
+            <a href="{% url 'event_detail' event.id %}"
+              class="inline-flex items-center text-indigo-600 font-medium hover:underline">
+              View Details
+              <svg xmlns="http://www.w3.org/2000/svg" class="ml-1 h-4 w-4" fill="none" viewBox="0 0 24 24"
+                stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    {% else %}
+    <!-- Empty State -->
+    <div class="text-center mt-16 text-gray-500">
+      <div class="flex items-center justify-center mx-auto mb-4 bg-gray-200 w-16 h-16 rounded-full">
+        <svg class="w-8 h-8 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+          stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round"
+            d="M8 7V3m8 4V3m-9 4h10M5 11h14M5 19h14M5 15h14" />
+        </svg>
+      </div>
+      <h3 class="text-lg font-semibold">No events found</h3>
+      <p class="text-sm text-gray-400">Try changing your filters or search keywords</p>
+    </div>
+    {% endif %}
+  </div>
+</section>
+
+{% endblock %}
